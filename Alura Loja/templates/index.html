@@ -1,0 +1,53 @@
+{{define "Index"}}
+{{template "_head"}}
+  <body>
+    <main class="container-fluid">
+      {{template "_navbar"}}
+      <section class="container">
+        <table class="table-striped table-hover table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{range .}}
+            <tr>
+              <td>{{.Nome}}</td>
+              <td>{{.Descricao}}</td>
+              <td>{{.Preco}}</td>
+              <td>{{.Quantidade}}</td>
+              <td>
+                <a class="btn btn-info" href="/edit?id={{.Id}}&nome={{.Nome}}&descricao={{.Descricao}}&preco={{.Preco}}&quantidade={{.Quantidade}}"> 
+                    <i class="fa fa-pencil-square-o""></i> 
+                    Editar
+                </a>
+                <button class="btn btn-danger" onclick="confirmarExclusao({{.Id}}, '{{.Nome}}')"> 
+                    <i class="fa fa-trash"></i> 
+                    Excluir
+                </button>
+              </td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+        <a href="/new" class="btn btn-primary">
+            <i class="fa fa-plus"></i> Novo Produto
+        </a>
+      </section>
+    </main>
+
+    <script>
+        function confirmarExclusao(id, nome) {
+            if (confirm(`Deseja excluir o produto ${nome}?`)) {
+            location.href = "/delete?id=" + id;
+            }
+        }
+    </script>
+  </body>
+</html>
+{{end}}

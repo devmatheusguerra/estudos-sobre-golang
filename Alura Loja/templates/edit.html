@@ -1,0 +1,34 @@
+{{define "Edit"}}
+{{template "_head"}}
+  <body>
+    <main class="container-fluid">
+      {{template "_navbar"}}
+      <section class="container">
+        <h1>Editar produto</h1>
+        <form action="/update?id={{.Id}}" method="POST">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{{.Nome}}"/>
+          </div>
+          <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea style="resize: none; height: 165px" type="text" class="form-control" id="descricao" name="descricao">{{.Descricao}}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="preco">Preço</label>
+            <input type="number" step="0.01" class="form-control" id="preco" name="preco" value="{{.Preco}}"/>
+          </div>
+          <div class="form-group">
+            <label for="quantidade">Quantidade</label>
+            <input type="number" step="1" class="form-control" id="quantidade" name="quantidade" value="{{.Quantidade}}"/>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Salvar Mudanças
+          </button>
+          <a href="/" class="btn btn-secondary">Cancelar</a>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
+{{end}}
