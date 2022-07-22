@@ -51,6 +51,10 @@ func EditarPersonalidade(w http.ResponseWriter, r *http.Request) {
 	id := params["id"]
 	var personalidade models.Personalidade
 	database.DB.First(&personalidade, id)
+	if personalidade.Id == 0 {
+		w.WriteHeader(http.StatusNotModified)
+		return
+	}
 	json.NewDecoder(r.Body).Decode(&personalidade)
 	personalidade_id, err := strconv.Atoi(id) // Evita que o ID seja alterado
 	if err != nil {
